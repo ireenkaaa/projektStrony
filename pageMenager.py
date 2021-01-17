@@ -1,27 +1,27 @@
-from dataGenerator import generateDataRandom
-from FCFS import FCFS
-listPages = []
-listTime = []
-numberOfPages = 10
-numberOfFrames = 5
+from dataGenerator import generateDataRandom, generateDataFromFile
+from FIFO import FIFO
+from LRU import LRU
 
-generateDataRandom(listPages, numberOfPages)
 
-def addPage (memoryList, timer, pageCounter):
-    tempPage=listPages[pageCounter]
+def addPage(memoryList, timer, pageCounter, listPages):
+    tempPage = listPages[pageCounter]
     isPageInMemory = False
     for i in range(len(memoryList)):
-        if memoryList[i]==[0,0,0]:
-            memoryList[i][0] = tempPage  # miejsce numeru strony
-            memoryList[i][1] = timer
-            memoryList[i][2] += 1
-            break
-        elif tempPage== memoryList[i][0]:#miejsce numeru strony
+        if tempPage == memoryList[i][0]:  # miejsce numeru strony
             isPageInMemory = True
+            memoryList[i][2]=timer
             break
-    if isPageInMemory==False:
-       FCFS(memoryList , tempPage, timer)
+    if [0, 0, 0] in memoryList and isPageInMemory==False:
+        i = memoryList.index([0, 0, 0])
+        memoryList[i][0] = tempPage  # miejsce numeru strony
+        memoryList[i][1] = timer
+        memoryList[i][2] =timer
 
-    pageCounter+=1
+    elif isPageInMemory == False:
+        #FIFO(memoryList, tempPage, timer)
+        LRU(memoryList,tempPage,timer)
+
+
+    pageCounter += 1
 
     return pageCounter

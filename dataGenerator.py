@@ -23,11 +23,23 @@ def generateDataRandom(listPages, numberOfPages):
         listPages.append(randint(1, numberOfPages))
 
     saveToFileBefore(listPages, "numbersOfPages")
+def generateDataFromFile(listPages,numberOfPages):
+    try:
+
+        with open('pagesFromFile.txt', 'r') as filehandle:
+            filecontents = filehandle.readlines()
+
+            for line in filecontents:
+                current_place = line[:-1]
+                listPages.append(int(current_place))
+        filehandle.close()
+    except IOError:
+        print("File not accessible")
+        generateDataRandom(listPages, numberOfPages)
 
 
 def generateDataZero(listTimes, listDuration, numberOfProcesses):
     for i in range(numberOfProcesses):
         listTimes.append(0)
         listDuration.append(randint(1, 7))
-    saveToFileBefore(listTimes, "time")
     saveToFileBefore(listDuration, "duration")

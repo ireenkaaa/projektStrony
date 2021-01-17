@@ -1,14 +1,27 @@
-from pageMenager import numberOfPages, numberOfFrames, addPage
+from pageMenager import addPage
+from dataGenerator import generateDataRandom, generateDataFromFile
 memory = []
 timer = 0
-listOfPages = []
+listPages = []
+numberOfPages = 12
+numberOfFrames = 4
+
+generateDataFromFile(listPages, numberOfPages)
+
 for i in range(numberOfFrames):
-    memory.append([0, 0, 0]) # [0] numer strony [1] timer [2] liczba użyć danej strony
+    memory.append([0, 0, 0]) # [0] numer strony [1] przybycie strony [2] ostatnia modyfikacja strony
 pageCounter=0
 for i in range (numberOfPages):
-    pageCounter= addPage(memory,timer,pageCounter)
-    print(memory)
+    pageCounter= addPage(memory,timer,pageCounter, listPages)
+    for i in range(len(memory)):
+
+        print("["+str(memory[i][0])+"]", end='')
+
+    print()
+   # print(memory)
+
     timer+=1
+
 # generator wartosci przychodzacych do pamieci
 # sprawdzenie czy dana wartosc znajduje się w ramce
 # jesli nie to szukamy najstraszej wartosci (t max)
