@@ -3,7 +3,7 @@ from FIFO import FIFO
 from LRU import LRU
 
 
-def addPage(memoryList, timer, pageCounter, listPages):
+def addPage(memoryList, timer, pageCounter, listPages,globalCounter):
     tempPage = listPages[pageCounter]
     isPageInMemory = False
     for i in range(len(memoryList)):
@@ -17,9 +17,11 @@ def addPage(memoryList, timer, pageCounter, listPages):
         memoryList[i][1] = timer
         memoryList[i][2] =timer
 
+
     elif isPageInMemory == False:
         #FIFO(memoryList, tempPage, timer)
         LRU(memoryList,tempPage,timer)
+        globalCounter[0] += 1
 
 
     pageCounter += 1

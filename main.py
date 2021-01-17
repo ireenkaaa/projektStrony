@@ -5,14 +5,15 @@ timer = 0
 listPages = []
 numberOfPages = 12
 numberOfFrames = 4
-
+globalCounter=[0]
 generateDataFromFile(listPages, numberOfPages)
+
 
 for i in range(numberOfFrames):
     memory.append([0, 0, 0]) # [0] numer strony [1] przybycie strony [2] ostatnia modyfikacja strony
 pageCounter=0
 for i in range (numberOfPages):
-    pageCounter= addPage(memory,timer,pageCounter, listPages)
+    pageCounter= addPage(memory,timer,pageCounter, listPages,globalCounter)
     for i in range(len(memory)):
 
         print("["+str(memory[i][0])+"]", end='')
@@ -21,12 +22,7 @@ for i in range (numberOfPages):
    # print(memory)
 
     timer+=1
+print(globalCounter[0])
 
-# generator wartosci przychodzacych do pamieci
-# sprawdzenie czy dana wartosc znajduje się w ramce
-# jesli nie to szukamy najstraszej wartosci (t max)
-# jesli tak to idziemy do kolejnej wartosci
-# licznik ilosci zmian w ramce
-#
 
 
